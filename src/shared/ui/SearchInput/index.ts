@@ -1,1 +1,1 @@
-export { SearchField } from './ui/SearchField'
+export { SearchInput } from './ui/SearchField'

@@ -1,7 +1,7 @@
 'use client'
 
 import { Typography, AppBar } from '@mui/material'
-import { SearchField } from '@/shared/ui/SearchInput'
+import { SearchInput } from '@/shared/ui/SearchInput'
 import { MenuBtn } from '@/shared/ui/Menu'
 import s from './s.module.scss'
 import { useRouter } from 'next/navigation'
@@ -42,7 +42,7 @@ export const Header = () => {
                 >
                     Administration panel | User: Ivan
                 </Typography>
-                <SearchField />
+                <SearchInput />
             </div>
         </AppBar>
     )

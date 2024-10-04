@@ -4,8 +4,13 @@ import { CreateSearchWrapper } from './components/CreateSearchWrapper'
 import { CreateIconWrapper } from './components/CreateIconWrapper'
 import SearchIcon from '@mui/icons-material/Search'
 import { CreateStyleInput } from './components/CreateStyleInput'
+import { type FC } from 'react'
 
-export const SearchField = () => {
+interface SearchInput {
+    onChange?: (value: string) => void
+}
+
+export const SearchInput: FC<SearchInput> = () => {
     return (
         <CreateSearchWrapper
             options={{
@@ -21,6 +26,10 @@ export const SearchField = () => {
             >
                 <SearchIcon />
             </CreateIconWrapper>
+            {/* TODO: как прокинуть onChange, чтобы получать значения из поля?
+             * Правильнее назвать компонент не СreateStyleInput, а CustomInput
+             */}
+
             <CreateStyleInput
                 options={{}}
                 placeholder="Token"
