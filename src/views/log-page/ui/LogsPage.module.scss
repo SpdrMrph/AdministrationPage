@@ -1,0 +1,12 @@
+.page{
+  border: 1px solid black;
+  display: flex;
+  gap: var(--gap-1);
+  padding: var(--gap-1);
+  flex-grow: 1;
+}
+
+.log-screen {
+  flex-grow: 1;
+  border: 1px solid rgb(0 0 0 / 50%)
+}

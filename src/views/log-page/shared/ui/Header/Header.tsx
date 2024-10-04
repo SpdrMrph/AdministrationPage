@@ -17,7 +17,7 @@ const Header: FC<HeaderProps> = ({
               ? 'space-between'
               : 'flex-start'
     return (
-        <AppBar position={position} sx={sx} className={className}>
+        <AppBar id="APP BAR" position={position} sx={sx} className={className}>
             <Toolbar variant={'dense'}>
                 <Box
                     sx={{

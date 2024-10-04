@@ -1,3 +1,5 @@
+'use client'
+
 import React, {
     createContext,
     FC,
@@ -9,6 +11,7 @@ import React, {
 interface ContextProps {
     children: ReactNode
 }
+
 interface AdminPanelContextType {
     anchorEl: HTMLButtonElement | null
     selectedItem: string | null
@@ -18,8 +21,8 @@ interface AdminPanelContextType {
     handleMenuItemClick: (item: string) => void
 }
 
-const AdminPanelContext = createContext<AdminPanelContextType | undefined>(
-    undefined,
+const AdminPanelContext = createContext<AdminPanelContextType>(
+    {} as AdminPanelContextType,
 )
 
 export const AdminPanelProvider: FC<ContextProps> = ({ children }) => {

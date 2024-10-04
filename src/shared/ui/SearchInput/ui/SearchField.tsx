@@ -1,8 +1,9 @@
-import { CreateSearchWrapper } from '@/shared/ui/SearchInput/ui/ui/CreateSearchWrapper'
-import { CreateIconWrapper } from '@/shared/ui/SearchInput/ui/ui/CreateIconWrapper'
+'use client'
+
+import { CreateSearchWrapper } from './components/CreateSearchWrapper'
+import { CreateIconWrapper } from './components/CreateIconWrapper'
 import SearchIcon from '@mui/icons-material/Search'
-import { CreateStyleInput } from '@/shared/ui/SearchInput/ui/ui/CreateStyleInput'
-import * as React from 'react'
+import { CreateStyleInput } from './components/CreateStyleInput'
 
 export const SearchField = () => {
     return (
