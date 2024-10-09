@@ -1,9 +1,9 @@
 'use client'
 
-import { type FC, useCallback, useEffect, useRef, useState } from 'react'
+import { type FC, useCallback, useMemo, useRef, useState } from 'react'
 import { Box, Menu, MenuItem } from '@mui/material'
-import { useOutsideClick } from '@/shared/hooks/useOutsideClick'
-import { Icon } from '@/shared/ui/Menu/ui/Icon'
+import { Icon } from './Icon'
+import { usePathname } from 'next/navigation'
 
 /* TODO: Запрещен импорт из вышестоящих слоёв.
  * Shared - самый нижний слой.
@@ -29,23 +29,17 @@ interface MenuBtnProps {
 
 export const MenuBtn: FC<MenuBtnProps> = (props) => {
     const { onChange, items = [] } = props
-
+    const pathName = usePathname()
     const [open, setOpen] = useState(false)
     const [state, setState] = useState(() =>
-        items?.map((el, i) => ({ ...el, active: i === 0 })),
+        items?.map((el) => ({
+            ...el,
+            active: el.value === pathName,
+        })),
     )
 
-    useOutsideClick({
-        onClose: () => setOpen(false),
-        handler: open,
-    })
-
     const ref = useRef<HTMLElement | null>(null)
-
-    const getSelectedItem = useCallback(() => {
-        const { label, value } = state.find((el) => el.active) as MenuValue
-        return { label, value }
-    }, [state])
+    const openMenu = useCallback(() => setOpen(true), [])
 
     const changeSelectedItem = (value: string) => {
         setState((p) =>
@@ -56,24 +50,26 @@ export const MenuBtn: FC<MenuBtnProps> = (props) => {
         )
     }
 
-    useEffect(() => {
-        onChange?.(getSelectedItem())
-        /* eslint-disable react-hooks/exhaustive-deps */
-    }, [state])
+    const activeLabel = useMemo(
+        () => (state.find((el) => el.active) as MenuValue).label,
+        [state],
+    )
 
     return (
         <Box ref={ref} sx={{ position: 'relative', display: 'inline-block' }}>
-            <Icon
-                onClick={() => setOpen(true)}
-                label={getSelectedItem()?.label}
-            />
+            <Icon onClick={openMenu} label={activeLabel} />
+
             <Menu anchorEl={ref.current} open={open}>
                 {state.map(({ value, label, active }) => {
                     return (
                         <MenuItem
                             key={label}
                             selected={active}
-                            onClick={() => changeSelectedItem(value)}
+                            onClick={() => {
+                                changeSelectedItem(value)
+                                setOpen(false)
+                                onChange?.({ value, label })
+                            }}
                         >
                             {label}
                         </MenuItem>

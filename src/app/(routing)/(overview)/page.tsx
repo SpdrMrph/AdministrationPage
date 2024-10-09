@@ -1,1 +1,1 @@
-export { LogsPage as default } from '@/views/log-page'
+export { LogsPage as default } from '@/views/LogsPage'

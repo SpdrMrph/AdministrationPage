@@ -12,7 +12,7 @@ interface PropsStyleInput extends InputBaseProps {
     options: Options
 }
 
-export const CreateStyleInput = ({ options, ...props }: PropsStyleInput) => {
+export const CreateStyleInput = ({ options }: PropsStyleInput) => {
     const { color = 'inherit', width = '100%', customSpacing = 1 } = options
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -31,5 +31,5 @@ export const CreateStyleInput = ({ options, ...props }: PropsStyleInput) => {
         },
     }))
 
-    return <StyledInputBase {...props} />
+    return <StyledInputBase />
 }

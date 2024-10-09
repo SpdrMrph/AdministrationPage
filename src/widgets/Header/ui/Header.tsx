@@ -2,24 +2,39 @@
 
 import { Typography, AppBar } from '@mui/material'
 import { SearchInput } from '@/shared/ui/SearchInput'
-import { MenuBtn } from '@/shared/ui/Menu'
+import { MenuBtn } from './component/Menu'
 import s from './s.module.scss'
 import { useRouter } from 'next/navigation'
 import { navigation } from '@/shared/consts/navigation'
 
 const menuItems = [
-    { label: 'Logs', value: 'logs' },
-    { label: 'Statistics', value: 'statistics' },
-    { label: 'Dashboards', value: 'dashboards' },
+    { label: 'Logs', value: '/' },
+    { label: 'Statistics', value: '/statistics' },
+    { label: 'Dashboards', value: '/dashboards' },
 ] as const
+
+const personalToken = [
+    {
+        value: 'FlexToken',
+        active: false,
+    },
+    {
+        value: 'BoosterKey',
+        active: false,
+    },
+    {
+        value: 'PowerPass',
+        active: false,
+    },
+]
 
 export const Header = () => {
     const router = useRouter()
 
     const navigate = {
-        logs: () => router.push(navigation.logs),
-        statistics: () => router.push(navigation.statistics),
-        dashboards: () => router.push(navigation.dashboards),
+        Logs: () => router.push(navigation.logs),
+        Statistics: () => router.push(navigation.statistics),
+        Dashboards: () => router.push(navigation.dashboards),
     }
 
     return (
@@ -28,7 +43,7 @@ export const Header = () => {
                 <MenuBtn
                     items={menuItems}
                     onChange={(data) => {
-                        navigate[data.value as keyof typeof navigate]()
+                        navigate[data.label as keyof typeof navigate]()
                     }}
                 />
                 <Typography
@@ -42,7 +57,7 @@ export const Header = () => {
                 >
                     Administration panel | User: Ivan
                 </Typography>
-                <SearchInput />
+                <SearchInput tokenList={personalToken} />
             </div>
         </AppBar>
     )

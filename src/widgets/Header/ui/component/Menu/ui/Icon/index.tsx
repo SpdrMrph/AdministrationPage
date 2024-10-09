@@ -1,13 +1,13 @@
 import { Badge, IconButton } from '@mui/material'
 import DatasetIcon from '@mui/icons-material/Dataset'
-import { type FC } from 'react'
+import { memo, type FC, type MouseEventHandler } from 'react'
 
 interface IconProps {
-    onClick?: () => void
+    onClick?: MouseEventHandler<HTMLButtonElement>
     label: string
 }
 
-export const Icon: FC<IconProps> = (props) => {
+export const Icon: FC<IconProps> = memo((props) => {
     const { onClick, label } = props
 
     return (
@@ -20,4 +20,6 @@ export const Icon: FC<IconProps> = (props) => {
             </Badge>
         </IconButton>
     )
-}
+})
+
+Icon.displayName = 'Icon'
